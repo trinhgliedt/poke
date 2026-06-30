@@ -1,0 +1,36 @@
+.app-container {
+    background: var(--bg--gradient);
+}
+
+.app-container.dark {
+    background: var(--bg--dark);
+}
+
+.app-container.dark,
+.app-container.dark h1,
+.app-container.dark p {
+    color: var(--text--dark);
+}
+
+.app-container.dark a,
+.app-container.dark button {
+    color: var(--link--dark);
+}
+
+.svg-icon {
+  color: var(--link--gradient);
+}
+
+.app-container.dark .svg-icon {
+  color: var(--link--dark)
+}
+
+.app-container.light .filter-select {
+    background-color: var(--form-bg);
+    color: black;
+}
+
+.app-container.dark .filter-select {
+    background-color: var(--form-bg--dark);
+    color: white;
+}

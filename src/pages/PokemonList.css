@@ -1,0 +1,15 @@
+.poke-list-page {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 0;
+    max-width: 100%;
+}
+
+.poke-list-page.active {
+    display: flex;
+}
+.no-match-found {
+    margin-top: 40px;
+}

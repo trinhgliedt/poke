@@ -1,0 +1,99 @@
+.poke-home {
+    display: grid;
+    gap: 24px;
+    padding: 20px 24px 40px;
+}
+
+.poke-home h1 {
+    line-height: 1;
+    margin-top: 0;
+}
+
+.poke-home__hero,
+.poke-home__content {
+    width: min(1060px, 100%);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.poke-home__hero {
+    padding: 36px 32px;
+    border: 1px solid var(--border--gradient);
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(217, 245, 4, 0.473), rgba(255, 244, 200, 0.204));
+    box-shadow: var(--shadow);
+}
+
+.poke-home__eyebrow {
+    margin-bottom: 12px;
+    font-family: 'Kalam-Regular', cursive;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.poke-home__title {
+    margin-bottom: 16px;
+}
+
+.poke-home__lead {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.poke-home__content {
+    display: grid;
+    gap: 16px;
+    padding: 28px 32px;
+    border-radius: 24px;
+    background: rgba(239, 179, 144, 0.281);
+    box-shadow: var(--shadow);
+    line-height: 1.75;
+}
+
+.poke-home__contact {
+    text-align: center;
+}
+
+.poke-home__copy-btn {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border--gradient);
+    background: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+}
+
+.app-container.dark .poke-home__copy-btn {
+    background: rgba(2, 56, 52, 0.6);
+    border-color: rgba(88, 234, 207, 0.3);
+    color: var(--link--dark);
+}
+
+.app-container.dark .poke-home__hero {
+    background: linear-gradient(135deg, rgba(98, 92, 4, 0.9), rgba(103, 45, 4, 0.88));
+    border-color: rgba(88, 234, 207, 0.3);
+    box-shadow: var(--shadow--dark);
+}
+
+.app-container.dark .poke-home__content {
+    background: rgba(2, 56, 52, 0.985);
+    box-shadow: var(--shadow--dark);
+}
+
+@media (max-width: 768px) {
+    .poke-home {
+        padding: 32px 16px 24px;
+    }
+
+    .poke-home__hero,
+    .poke-home__content {
+        padding: 24px 20px;
+        border-radius: 20px;
+    }
+}
+
+.poke-home button {
+    font-size: 18px;
+    padding: 0;
+    text-decoration: underline;
+}

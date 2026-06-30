@@ -1,0 +1,16 @@
+<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="ssf-icon" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Search -->
+    <circle cx="7.5" cy="7.5" r="3.8"/>
+    <path d="M10.3 10.3L13 13"/>
+
+    <!-- Filter (funnel) -->
+    <path d="M14.5 5.5H22L19 9.2V12.8L17.2 13.8V9.2L14.5 5.5Z"/>
+
+    <!-- Sort -->
+    <path d="M3 16H14"/>
+    <path d="M3 19.5H11"/>
+    <path d="M16.5 16V20"/>
+    <path d="M15.2 18.7L16.5 20L17.8 18.7"/>
+  </g>
+</svg>

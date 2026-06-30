@@ -1,0 +1,180 @@
+.poke-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    outline: 1px solid grey;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.poke-card--link {
+    margin: 3px;
+    position: relative;
+    z-index: 0;
+}
+
+.poke-card--link:focus-visible {
+    outline: 3px solid yellow;
+}
+
+.poke-card.collected {
+    background: linear-gradient(135deg, #dae10594, #51ff0049);
+}
+.poke-card .card-btn,
+.poke-card .card-tag {
+    position: absolute;
+    top: 0;
+    transition: transform 0.2s ease;
+    z-index: 1;
+}
+
+.poke-card .card-btn {
+    right: 0;
+}
+.poke-card .card-tag {
+    left: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 10px;
+    background-color: #046804be;
+    padding: 5px;
+    border-bottom-right-radius: 6px;
+    color: yellow;
+    line-height: 1;
+
+}
+.poke-card .card-btn:hover {
+    transform: scale(1.1);
+    outline: 1px solid gray;
+    border-bottom-left-radius: 15px;
+    background-color: #ffe60075;
+}
+
+.poke-card.collected .card-btn:hover {
+    background-color: #f7f4f4;
+}
+
+.app-container.dark .poke-card.collected .card-btn:hover {
+    background-color: #3d3b3b;
+}
+
+.poke-card a.poke-card--link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+@media (min-width: 1401px) {
+    .poke-card {
+        min-width: calc((100% - 80px)/5);
+        max-width: calc((100% - 80px)/5);
+    }
+}
+.poke-card__name {
+    text-transform: capitalize;
+    font-size: 28px;
+    font-family: 'Kalam-Regular', sans-serif;
+    opacity: 0.7;
+    margin-top: 10px;
+    margin-bottom: 3px;
+}
+
+.poke-card--link:hover .poke-card__name {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.poke-card .poke-card--img {
+    padding: 10px 10px 5px 10px;
+    min-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.poke-card--link:hover .poke-card--img {
+    transform: scale(1.02);
+}
+.poke-card__info {
+    font-size: 14px;
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+.poke-card__info__label {
+    color: #210303;
+}
+
+.app-container.dark .poke-card__info__label {
+    color: #c4bfbf;
+}
+
+.poke-card__info__xp,
+.sort-direction.xp {
+    color: red;
+    text-shadow: 0 0 1px #f71b0cff;
+}
+
+.app-container.dark .poke-card__info__xp,
+.app-container.dark .sort-direction.xp {
+    color: #ffd919;
+    text-shadow: 0 0 1px #f82213ff;
+}
+
+.poke-card__info__weight,
+.sort-direction.weight {
+    color: #707008;
+    text-shadow: 0 0 1px red;
+}
+
+.app-container.dark .poke-card__info__weight,
+.app-container.dark .sort-direction.weight {
+    color: yellow;
+    text-shadow: 0 0 1px #bc60f4ff;
+}
+
+.poke-card__info__height,
+.sort-direction.height {
+    color: #6f02f5fe;
+    text-shadow: 0 0 1px #ff0303ff;
+}
+
+.app-container.dark .poke-card__info__height,
+.app-container.dark .sort-direction.height {
+    color: #fd5d06fe;
+    text-shadow: 0 0 1px #ebccfaff;
+}
+
+.poke-card .add-btn {
+    height: 35px;
+}
+
+.poke-card .add-btn img {
+    color: red;
+}
+
+.poke-card__types {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+.poke-card__types button {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 2px 5px;
+    line-height: 1;
+    background-color: #ebe1e196;
+    border-radius: 4px;
+    color: black;
+    cursor: default;
+}
+
+.poke-card__types button:enabled {
+    cursor: pointer;
+}
+.app-container.dark .poke-card__types button  {
+    background-color: #38333396;
+}
