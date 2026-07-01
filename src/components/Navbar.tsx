@@ -90,10 +90,12 @@ export default function Navbar(props: NavbarProps) {
                 </button>
                 
                 <span className={`nav-link-list ${showMenu ? 'open' : ''}`}>
-                    <Link to="/pokemon-list" >Pokemon List</Link>
-                    {/* <Link to="/my-account" >My Account</Link> */}
-                    <Link to="/my-collection" >My Collection</Link>
-                    <button title={`Switch to ${theOtherTheme} theme`} onClick={() => setTheme(toggleTheme(theme))}>{theme} theme</button>
+                    <Link to="/pokemon-list" onClick={() => setShowMenu(false)}>Pokemon List</Link>
+                    <Link to="/my-collection" onClick={() => setShowMenu(false)}>My Collection</Link>
+                    <button title={`Switch to ${theOtherTheme} theme`} onClick={() => {
+                        setTheme(toggleTheme(theme))
+                        setShowMenu(false);
+                    }}>{theme} theme</button>
                 </span>
             </span>
         </div>
