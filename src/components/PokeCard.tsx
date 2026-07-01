@@ -2,6 +2,10 @@ import "./PokeCard.css";
 import { Link } from "react-router-dom";
 import type { Pokemon, MyCollection, Type } from "../interfaces";
 import type { Dispatch, SetStateAction } from "react";
+import addIconDark from "../assets/icons/add-to-collection__dark.svg";
+import addIcon from "../assets/icons/add-to-collection.svg";
+import removeIconDark from "../assets/icons/remove-from-collection__dark.svg";
+import removeIcon from "../assets/icons/remove-from-collection.svg";
 
 type PokeCardProps = {
     pokeList: Pokemon[];
@@ -117,7 +121,7 @@ export default function PokeCard( props: PokeCardProps) {
                     <button
                         className="card-btn"
                         title={addToCollectionText}>
-                        <img src="/add-to-collection.svg" width='35' height='35'
+                        <img src={addIcon} width='35' height='35'
                         alt={addToCollectionText}
                         onClick={() => handleAddToCollection(props.pokeName)} />
                     </button>
@@ -126,7 +130,7 @@ export default function PokeCard( props: PokeCardProps) {
                     <button
                         className="card-btn"
                         title={addToCollectionText}>
-                        <img src="/add-to-collection__dark.svg" width='35' height='35'
+                        <img src={addIconDark} width='35' height='35'
                         alt={addToCollectionText}
                         onClick={() => handleAddToCollection(props.pokeName)} />
                     </button>
@@ -135,7 +139,7 @@ export default function PokeCard( props: PokeCardProps) {
                     <button
                         className="card-btn"
                         title={removeFromCollectionText}>
-                        <img src="/remove-from-collection.svg" width='35' height='35'
+                        <img src={removeIcon} width='35' height='35'
                         alt={removeFromCollectionText}
                         onClick={() => handleRemoveFromCollection(props.pokeName)} />
                     </button>
@@ -144,7 +148,7 @@ export default function PokeCard( props: PokeCardProps) {
                 <button
                         className="card-btn"
                         title={removeFromCollectionText}>
-                        <img src="/remove-from-collection__dark.svg" width='35' height='35'
+                        <img src={removeIconDark} width='35' height='35'
                         alt={removeFromCollectionText}
                         onClick={() => handleRemoveFromCollection(props.pokeName)} />
                     </button>

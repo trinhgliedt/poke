@@ -4,6 +4,7 @@ import "./Navbar.css";
 import { Link, useMatch } from "react-router-dom";
 import type { OptionType, Pokemon } from "../interfaces";
 import SearchSortFilter from "./SearchSortFilter";
+import logo from "../assets/logo/main-logo.webp";
 
 interface NavbarProps {
     theme: string;
@@ -74,7 +75,7 @@ export default function Navbar(props: NavbarProps) {
             
             <span className="navbar--left">
                 <div className={`backdrop ${showMenu ? '' : 'hide'}`} ></div>
-            <Link to="/" className="navbar--logo"><img src="/main-logo.webp" alt="Pikachu" width="100%"/></Link>
+            <Link to="/" className="navbar--logo"><img src={logo} alt="Pikachu" width="100%"/></Link>
             </span>
             <span className="navbar--right">
                 {isPokemonListPage &&
