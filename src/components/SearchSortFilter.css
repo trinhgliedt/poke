@@ -176,10 +176,9 @@
     border-top: 1px solid #000000d1;
     border-right: 1px solid #000000d1;
     display: inline-block;
-    rotate: 135deg;
-    transform: translate(-1px, 1px);
+    transform: translate(-1px, 1px) rotate(135deg);
     caret-color: transparent;
-    transition: rotate 0.2s;
+    transition: transform 0.2s;
 }
 
 .app-container.dark .search-sort-filter--toggle-icon {
@@ -188,8 +187,7 @@
 }
 
 .search-sort-filter--toggle-icon.rotate {
-    rotate: -45deg;
-    transform: translate(-4px, 4px);
+    transform: translate(-0px, 4px) rotate(-45deg);
 }
 
 .search-sort-filter__content {
