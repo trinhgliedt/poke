@@ -231,7 +231,10 @@ function App() {
           {/* <Route path="/my-collection" element={<MyPokemonCollection />}/> */}
           <Route path="/my-collection" element={<PokemonList { ...{ isMyCollectionPage:true, pokeList, setPokeList, loading, theme, allPokemonDetailsLoaded, itemsPerPage, searchStr, searchStrCollection, activePage, setActivePage, activePageCollection, setActivePageCollection, abilityFilter, abilityFilterCollection, typeFilter, typeFilterCollection, abilityFilters, typeFilters, setAbilityFilters, setTypeFilters, sortType, nameSort, xpSort, heightSort, weightSort, myCollection, setMyCollection, paginateByPrimaryType } }/>} />
           <Route path="/pokemon-list" element={<PokemonList { ...{ pokeList, setPokeList, loading, theme, allPokemonDetailsLoaded, itemsPerPage, searchStr, searchStrCollection, activePage, setActivePage, activePageCollection, setActivePageCollection, abilityFilter, abilityFilterCollection, typeFilter, typeFilterCollection, abilityFilters, typeFilters, setAbilityFilters, setTypeFilters, sortType, nameSort, xpSort, heightSort, weightSort, myCollection, setMyCollection, paginateByPrimaryType } }/>} />
-          <Route path="/pokemon/:id" element={<PokemonDetail />} />
+          <Route path="/pokemon/:id" 
+                element={
+                <PokemonDetail
+                {...{ pokeList, setPokeList, theme, myCollection, setMyCollection }} />} />
         </Routes>
       </HashRouter>
       </div>
