@@ -9,7 +9,7 @@
   <circle cx="11" cy="12" r="9" fill="#ECEBE6"/>
 
   <!-- Top half red -->
-  <rect x="2" y="3" width="18" height="9" fill="#d94b4bc0" clip-path="url(#ball-clip)"/>
+  <rect x="2" y="3" width="18" height="9" fill="#ea1616b5" clip-path="url(#ball-clip)"/>
 
   <!-- Outer line -->
   <circle cx="11" cy="12" r="9" stroke="#5d5d57" stroke-width="1"/>

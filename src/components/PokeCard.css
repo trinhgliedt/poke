@@ -31,7 +31,7 @@
 .poke-card.collected {
     background: linear-gradient(135deg, #dae10594, #51ff0049);
 }
-.poke-card .card-btn,
+.poke-card .btn-wrap,
 .poke-card .card-tag {
     position: absolute;
     top: 0;
@@ -39,8 +39,11 @@
     z-index: 1;
 }
 
-.poke-card .card-btn {
+.poke-card .btn-wrap {
     right: 0;
+    display: flex;
+    gap: 0;
+    align-items: stretch;
 }
 .poke-card .card-tag {
     left: 0;
@@ -57,8 +60,17 @@
 .poke-card .card-btn:hover {
     transform: scale(1.1);
     outline: 1px solid gray;
-    border-bottom-left-radius: 15px;
     background-color: #ffe60075;
+}
+
+.poke-card .card-btn.right:hover {
+    border-bottom-left-radius: 15px;
+}
+
+
+.poke-card .card-btn.card-btn--play:hover {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .poke-card.collected .card-btn:hover {
@@ -97,7 +109,7 @@
 }
 
 .poke-card .poke-card--img {
-    padding: 10px 10px 5px 10px;
+    padding: 15px 10px 5px 10px;
     min-height: 200px;
     margin-left: auto;
     margin-right: auto;
