@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# Pokédex App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript Pokémon encyclopedia app powered by [PokéAPI](https://pokeapi.co/).
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [https://trinhgliedt.github.io/poke/](https://trinhgliedt.github.io/poke/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Pokédex Screenshot](https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Browse Pokémon** — View all 1350+ Pokémon with images, types, abilities, and stats
+- **Search & Filter** — Find Pokémon by name, filter by type or ability
+- **Sort** — Sort by name, experience, height, or weight
+- **Pokémon Details** — View detailed information including base stats and abilities
+- **Evolution Map** — See the full evolution chain for each Pokémon
+- **My Collection** — Add Pokémon to your personal collection (saved to localStorage)
+- **Dark/Light Theme** — Toggle between dark and light mode
+- **Responsive Design** — Works on desktop and mobile
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 18** with TypeScript
+- **Vite** for fast development and builds
+- **React Router** for navigation
+- **PokéAPI** for Pokémon data
+- **GitHub Pages** for deployment
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/trinhgliedt/poke.git
+
+# Navigate to the project directory
+cd poke
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+The app will be available at `http://localhost:5173/`
+
+### Build for Production
+
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Deploy to GitHub Pages
+```bash
+npm run deploy
 ```
+
+## Data
+
+Pokémon data is pre-fetched and stored in `public/pokemon-data.json` to avoid rate limiting and provide instant load times. The data is sourced from [PokéAPI](https://pokeapi.co/).
+
+## Privacy
+
+- No user data is collected
+- Your Pokémon collection is stored locally in your browser's localStorage
+- No cookies or tracking
+
+## Acknowledgments
+
+- [PokéAPI](https://pokeapi.co/) for the comprehensive Pokémon data API
+- [Pokémon](https://www.pokemon.com/) — Pokémon and Pokémon character names are trademarks of Nintendo
+
+## License
+
+This is a fan project for educational purposes. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
+
+## Author
+
+Made with ❤️ by [trinhgliedt](https://github.com/trinhgliedt)
