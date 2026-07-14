@@ -40,7 +40,7 @@
             ],
             "weight": 69
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "ivysaur",
@@ -126,7 +126,7 @@
             ],
             "weight": 1000
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "charmander",
@@ -19674,7 +19674,7 @@
             ],
             "weight": 1355
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "weavile",
@@ -20673,7 +20673,7 @@
             ],
             "weight": 3360
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "heatran",
@@ -31476,7 +31476,7 @@
             ],
             "weight": 34
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "cutiefly",
@@ -39655,7 +39655,7 @@
             ],
             "weight": 160
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "mabosstiff",
@@ -44390,7 +44390,7 @@
             ],
             "weight": 590
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "gyarados-mega",
@@ -44939,7 +44939,7 @@
             ],
             "weight": 490
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "garchomp-mega",
@@ -45146,7 +45146,7 @@
             ],
             "weight": 700
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "swampert-mega",
@@ -45181,7 +45181,7 @@
             ],
             "weight": 1020
         },
-        "inMyCollection": true
+        "inMyCollection": false
     },
     {
         "name": "sceptile-mega",
