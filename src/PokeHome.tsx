@@ -32,9 +32,17 @@ export default function PokeHome() {
                     title="Clear local storage from this app"
                     onClick={() => localStorage.clear()}
                     >click here</button>, then exit the app.</p>
-            <p className="poke-home__contact">
+            <div className="poke-home__links">
                 <a href="mailto:chuot2008@gmail.com">Contact the developer</a>
-            </p>
+                <span> | </span>
+                <a
+                href="https://github.com/trinhgliedt/poke"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                View source on GitHub
+                </a>
+            </div>
         </section>
     )
 }

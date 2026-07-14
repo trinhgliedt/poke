@@ -97,3 +97,17 @@
     padding: 0;
     text-decoration: underline;
 }
+
+.poke-home__links {
+  margin-top: 24px;
+}
+
+.poke-home__links a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.poke-home__links span {
+  margin: 0 8px;
+  opacity: 0.5;
+}
