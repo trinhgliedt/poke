@@ -39,8 +39,7 @@
                 }
             ],
             "weight": 69
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "ivysaur",
@@ -82,8 +81,7 @@
                 }
             ],
             "weight": 130
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "venusaur",
@@ -125,8 +123,7 @@
                 }
             ],
             "weight": 1000
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "charmander",
@@ -162,8 +159,7 @@
                 }
             ],
             "weight": 85
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "charmeleon",
@@ -19673,8 +19669,7 @@
                 }
             ],
             "weight": 1355
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "weavile",
@@ -20672,8 +20667,7 @@
                 }
             ],
             "weight": 3360
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "heatran",
@@ -31475,8 +31469,7 @@
                 }
             ],
             "weight": 34
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "cutiefly",
@@ -39654,8 +39647,7 @@
                 }
             ],
             "weight": 160
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "mabosstiff",
@@ -44389,8 +44381,7 @@
                 }
             ],
             "weight": 590
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "gyarados-mega",
@@ -44938,8 +44929,7 @@
                 }
             ],
             "weight": 490
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "garchomp-mega",
@@ -45145,8 +45135,7 @@
                 }
             ],
             "weight": 700
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "swampert-mega",
@@ -45180,8 +45169,7 @@
                 }
             ],
             "weight": 1020
-        },
-        "inMyCollection": false
+        }
     },
     {
         "name": "sceptile-mega",
@@ -45215,8 +45203,7 @@
                 }
             ],
             "weight": 552
-        },
-        "inMyCollection": true
+        }
     },
     {
         "name": "sableye-mega",
