@@ -8,6 +8,7 @@
 
 .app-container.dark,
 .app-container.dark h1,
+.app-container.dark h2,
 .app-container.dark p {
     color: var(--text--dark);
 }
