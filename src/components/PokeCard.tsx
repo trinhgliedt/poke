@@ -23,12 +23,15 @@ type PokeCardProps = {
     myCollection: MyCollection;
     setMyCollection: Dispatch<SetStateAction<MyCollection>>;
     types: Type[];
+    isActive?: boolean;
+    linkTarget?: string;
 };
 
 export default function PokeCard( props: PokeCardProps) {
     const addToCollectionText = "Add to my collection";
     const removeFromCollectionText = "Remove from my collection";
     const formattedName = props.pokeName ? props.pokeName.charAt(0).toUpperCase() + props.pokeName.slice(1) : "";
+    const linkTarget = props.linkTarget || "_self";
 
     // useEffect(() => {
     //     console.log("types:", props.types);
@@ -112,7 +115,7 @@ export default function PokeCard( props: PokeCardProps) {
     }
 
     return (
-        <span className={`poke-card ${props.inMyCollection ? "collected" : ""}`}>
+        <span className={`poke-card ${props.inMyCollection ? "collected" : ""} ${props.isActive ? "active" : ""}`}>
             {props.inMyCollection && 
             <div className="card-tag" >Collected</div>}
 
@@ -120,44 +123,45 @@ export default function PokeCard( props: PokeCardProps) {
                 {props.theme === "light" && !props.inMyCollection &&
                     <button
                         className="card-btn"
-                        title={addToCollectionText}>
+                        title={addToCollectionText}
+                        onClick={() => handleAddToCollection(props.pokeName)} >
                         <img src={addIcon} width='35' height='35'
-                        alt={addToCollectionText}
-                        onClick={() => handleAddToCollection(props.pokeName)} />
+                        alt={addToCollectionText} />
                     </button>
                 }
                 {props.theme === "dark" && !props.inMyCollection &&
                     <button
                         className="card-btn"
-                        title={addToCollectionText}>
+                        title={addToCollectionText}
+                        onClick={() => handleAddToCollection(props.pokeName)} >
                         <img src={addIconDark} width='35' height='35'
-                        alt={addToCollectionText}
-                        onClick={() => handleAddToCollection(props.pokeName)} />
+                        alt={addToCollectionText} />
                     </button>
                 }
                 {props.theme === "light" && props.inMyCollection &&
                     <button
                         className="card-btn"
-                        title={removeFromCollectionText}>
+                        title={removeFromCollectionText}
+                        onClick={() => handleRemoveFromCollection(props.pokeName)}>
                         <img src={removeIcon} width='35' height='35'
-                        alt={removeFromCollectionText}
-                        onClick={() => handleRemoveFromCollection(props.pokeName)} />
+                        alt={removeFromCollectionText} />
                     </button>
                 }
                 {props.theme === "dark" && props.inMyCollection &&
                 <button
                         className="card-btn"
-                        title={removeFromCollectionText}>
+                        title={removeFromCollectionText}
+                        onClick={() => handleRemoveFromCollection(props.pokeName)}>
                         <img src={removeIconDark} width='35' height='35'
-                        alt={removeFromCollectionText}
-                        onClick={() => handleRemoveFromCollection(props.pokeName)} />
+                        alt={removeFromCollectionText} />
                     </button>
                 }
             </div>
 
             <Link to={props.detailPagePath}
-                    target="_blank"
+                    target={linkTarget}
                     className="poke-card--link"
+                    aria-current={props.isActive ? "page" : undefined}
                     aria-label={`Learn more about ${formattedName}`}
                     title={`Learn more about ${formattedName}`}>
                 {props.showImg &&

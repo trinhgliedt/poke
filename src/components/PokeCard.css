@@ -8,6 +8,16 @@
     overflow: hidden;
 }
 
+.poke-card.active {
+    outline: 3px solid #ef4444;
+    box-shadow: 0 0 0 4px #fde68a;
+}
+
+.app-container.dark .poke-card.active {
+    outline: 3px solid #facc15;
+    box-shadow: 0 0 0 4px #7c3aed;
+}
+
 .poke-card--link {
     margin: 3px;
     position: relative;
