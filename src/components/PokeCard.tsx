@@ -36,7 +36,7 @@ type PokeCardProps = {
 export default function PokeCard(props: PokeCardProps) {
   const addToCollectionText = "Add to my collection";
   const removeFromCollectionText = "Remove from my collection";
-  const playCryText = "Hear this Pokémon's call";
+  const playCryText = "Hear this Pokémon's cry";
   const formattedName = props.pokeName
     ? props.pokeName.charAt(0).toUpperCase() + props.pokeName.slice(1)
     : "";
