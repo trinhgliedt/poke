@@ -43,183 +43,176 @@ function App() {
   },[pokeList]);
 
   useEffect(() => {
-      let pokemonCount = 0;
-      const listingEndpoint = `https://pokeapi.co/api/v2/pokemon?offset=0&limit=${itemsPerPage}`;
-      const fetchPokemon = async () => {
-        // console.log('fetching pokemons, localStorage: ', localStorage);
-        let data = null;
-        // let count = 0;
-        setLoading(true);
-        try {
-          const response = await fetch(listingEndpoint);
-          if (!response.ok) {
-            throw new Error(`Can't  fetch the initial ${itemsPerPage} Pokemons`);
+  pokeListRef.current = pokeList;
+},[pokeList]);
+
+// ADD THIS NEW useEffect HERE ↓↓↓
+useEffect(() => {
+  const initializePokeList = async () => {
+    console.log("1. Starting initializePokeList");
+    setLoading(true);
+
+    const savedPokeListRaw = localStorage.getItem('pokeList');
+    const savedAllPokeDetailsLoadedRaw = localStorage.getItem('all-poke-details-loaded');
+    const itemCount = Number(localStorage.getItem('pokemon-list-count'));
+
+    console.log("2. localStorage check:", { 
+      hasPokeList: !!savedPokeListRaw, 
+      itemCount, 
+      allDetailsLoaded: savedAllPokeDetailsLoadedRaw 
+    });
+
+    if (savedPokeListRaw && itemCount && savedAllPokeDetailsLoadedRaw === "true") {
+      console.log("3. Using cached localStorage data");
+      const savedPokeList = JSON.parse(savedPokeListRaw) as Pokemon[];
+      setPokeList(savedPokeList);
+      setAllPokemonsLoaded(true);
+      setAllPokemonDetailsLoaded(true);
+      setLoading(false);
+      return;
+    }
+
+    console.log("4. Fetching from pokemon-data.json");
+    try {
+      const basePath = import.meta.env.BASE_URL || '/';
+      console.log("5. BASE_URL:", basePath);
+      
+      const response = await fetch(`${basePath}pokemon-data.json`);
+      console.log("6. Fetch response ok:", response.ok);
+
+      if (!response.ok) {
+        throw new Error("Can't fetch pokemon-data.json");
+      }
+
+      const staticPokeList = (await response.json()) as Pokemon[];
+      console.log("7. Loaded pokemon count:", staticPokeList.length);
+
+      let mergedPokeList = staticPokeList;
+
+      if (savedPokeListRaw) {
+        const savedPokeList = JSON.parse(savedPokeListRaw) as Pokemon[];
+        const collectedNames = new Set(
+          savedPokeList
+            .filter((p) => p.inMyCollection === true)
+            .map((p) => p.name)
+        );
+        console.log("8. Preserving collection, count:", collectedNames.size);
+
+        if (collectedNames.size > 0) {
+          mergedPokeList = staticPokeList.map((pokemon) => ({
+            ...pokemon,
+            inMyCollection: collectedNames.has(pokemon.name) ? true : pokemon.inMyCollection,
+          }));
+        }
+      }
+
+      console.log("9. Setting state and localStorage");
+      setPokeList(mergedPokeList);
+      setAllPokemonsLoaded(true);
+      setAllPokemonDetailsLoaded(true);
+
+      localStorage.setItem('pokeList', JSON.stringify(mergedPokeList));
+      localStorage.setItem('pokemon-list-count', String(mergedPokeList.length));
+      localStorage.setItem('all-poke-details-loaded', "true");
+      console.log("10. Done!");
+
+    } catch (err) {
+      console.error("Error loading pokemon-data.json:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  initializePokeList();
+}, []);
+
+  useEffect(() => {
+    const fetchPokeDetail = async (url: string) => {
+      try {
+        const res = await fetch(url);
+          if (!res.ok) {
+            console.log(`Can't fetch ${url}`);
           }
-          data = await response.json();
-          if (data.results) {
-            setPokeList(data.results);
+          const data = await res.json() as PokemonDetailType;
+          return { abilities: data.abilities,
+                    base_experience: data.base_experience,
+                    height: data.height,
+                    name: data.name,
+                    types: [ ...data.types.map((t, index) => {
+                    return {type: {name: t.type.name, primary: index === 0 }};
+                  })],
+                    weight: data.weight
           }
-          if (data.count) {
-            // console.log("count:", data.count);
-            pokemonCount = data.count;
-            localStorage.setItem('pokemon-list-count', data.count);
-          }
-          // console.log(data.results);
-        } catch(err) {
+        } catch (err) {
           console.error(err);
-        } finally {
-          setLoading(false);
+          return { abilities: [],
+                    base_experience: "",
+                    height: "",
+                    name: "",
+                    types: [{type: {name: "", primary: false}}],
+                    weight: ""
+          };
         }
+    }
 
-        try {
-          const response2 = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${itemsPerPage}&limit=${pokemonCount-itemsPerPage}`);
-          if (!response2.ok) {
-            throw new Error("Can't fetch the remaining Pokemons");
-          }
-          const data2 = await response2.json();
-          if (data2.results) {
-            const fullList = [...data.results, ...data2.results];
-            setPokeList(fullList);
-            localStorage.setItem('pokeList', JSON.stringify(fullList));
-          }
-        } catch(err) {
-          console.error(err);
-        } finally {
-          setAllPokemonsLoaded(true);
+    const fetchAllPokemonsDetail = async() => {
+      if (!allPokemonsLoaded) return;
+      const batchSize = 50;
+      const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
+      const updatedPokeList = [...pokeListRef.current];
+      for (let i = 0; i < pokeListRef.current.length; i+= batchSize) {
+        const batch = pokeListRef.current.slice(i, i + batchSize);
+        const detailsArray = await Promise.all(
+          batch.map((poke) => fetchPokeDetail(poke.url))
+        );
+
+        for (let j = 0; j < batch.length; j++) {
+          updatedPokeList[i + j] = { ...updatedPokeList[i + j], detail: detailsArray[j]};
         }
+        setPokeList([...updatedPokeList]);
+        localStorage.setItem('pokeList', JSON.stringify(updatedPokeList));
+        if (i + batchSize < pokeListRef.current.length) await delay(1000);
       }
+      setAllPokemonDetailsLoaded(true);
+      localStorage.setItem('all-poke-details-loaded', "true");
+    }
 
-      const itemCount = Number(localStorage.getItem('pokemon-list-count'));
-      const savedPokeListRaw = localStorage.getItem('pokeList');
-      const savedPokeList = savedPokeListRaw  ? JSON.parse(savedPokeListRaw) : [];
+    if (!allPokemonDetailsLoaded) {
+      fetchAllPokemonsDetail();
+    }
+  },[allPokemonsLoaded, allPokemonDetailsLoaded])
 
-      const savedAllPokeDetailsLoadedRaw = localStorage.getItem('all-poke-details-loaded');
-      if (savedAllPokeDetailsLoadedRaw === "true") {
-        setAllPokemonDetailsLoaded(true);
-      }
-      if (savedPokeListRaw && itemCount && savedAllPokeDetailsLoadedRaw === "true") {
-        setAllPokemonsLoaded(true);
-        setAllPokemonDetailsLoaded(true);
-        setPokeList(savedPokeList);
-      } else {
-        fetchPokemon();
-      }
+  // get theme from local storage
+  useEffect(() => {
+    // const savedTheme = localStorage.getItem('theme');
+    const savedSearch = localStorage.getItem('searchStr');
+    if (savedSearch) {
+      setSearchStr(savedSearch);
+    }
 
-      const savedAbilityFilter = localStorage.getItem('abilityFilter');
-      if (savedAbilityFilter) {
-        setAbilityFilter(savedAbilityFilter);
-      }
+    const savedSearchCollection = localStorage.getItem('searchStrCollection');
+    if (savedSearchCollection) {
+      setSearchStr(savedSearchCollection);
+    }
+    const savedActivePage = Number(localStorage.getItem('activePage'));
+    // console.log('app use effect', activePage, savedActivePage);
+    if (savedActivePage) {
+      setActivePage(savedActivePage);
+    } else {
+      setActivePage(1);
+      localStorage.setItem('activePage', "1");
+    }
 
-      const savedAbilityFilterCollection = localStorage.getItem('abilityFilterCollection');
-      if (savedAbilityFilterCollection) {
-        setAbilityFilter(savedAbilityFilterCollection);
-      }
-
-      const savedTypeFilter = localStorage.getItem('typeFilter');
-      if (savedTypeFilter) {
-        setTypeFilter(savedTypeFilter);
-      }
-
-      const savedTypeFilterCollection = localStorage.getItem('typeFilterCollection');
-      if (savedTypeFilterCollection) {
-        setTypeFilter(savedTypeFilterCollection);
-      }
-
-      const savedCollectionRaw = localStorage.getItem('myCollection');
-      const savedCollection = savedCollectionRaw ? JSON.parse(savedCollectionRaw) : {collection: [], binderInfo: {noOfCols: 0, noOfRows: 0, noOfPages: 0}};
-
-      if (savedCollectionRaw) setMyCollection(savedCollection);
-
-    },[]);
-
-    useEffect(() => {
-      const fetchPokeDetail = async (url: string) => {
-        try {
-          const res = await fetch(url);
-            if (!res.ok) {
-              console.log(`Can't fetch ${url}`);
-            }
-            const data = await res.json() as PokemonDetailType;
-            return { abilities: data.abilities,
-                     base_experience: data.base_experience,
-                     height: data.height,
-                     name: data.name,
-                     types: [ ...data.types.map((t, index) => {
-                      return {type: {name: t.type.name, primary: index === 0 }};
-                    })],
-                     weight: data.weight
-            }
-          } catch (err) {
-            console.error(err);
-            return { abilities: [],
-                     base_experience: "",
-                     height: "",
-                     name: "",
-                     types: [{type: {name: "", primary: false}}],
-                     weight: ""
-            };
-          }
-      }
-
-      const fetchAllPokemonsDetail = async() => {
-        if (!allPokemonsLoaded) return;
-        const batchSize = 50;
-        const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-
-        const updatedPokeList = [...pokeListRef.current];
-        for (let i = 0; i < pokeListRef.current.length; i+= batchSize) {
-          const batch = pokeListRef.current.slice(i, i + batchSize);
-          const detailsArray = await Promise.all(
-            batch.map((poke) => fetchPokeDetail(poke.url))
-          );
-
-          for (let j = 0; j < batch.length; j++) {
-            updatedPokeList[i + j] = { ...updatedPokeList[i + j], detail: detailsArray[j]};
-          }
-          setPokeList([...updatedPokeList]);
-          localStorage.setItem('pokeList', JSON.stringify(updatedPokeList));
-          if (i + batchSize < pokeListRef.current.length) await delay(1000);
-        }
-        setAllPokemonDetailsLoaded(true);
-        localStorage.setItem('all-poke-details-loaded', "true");
-      }
-
-      if (!allPokemonDetailsLoaded) {
-        fetchAllPokemonsDetail();
-      }
-    },[allPokemonsLoaded, allPokemonDetailsLoaded])
-
-    // get theme from local storage
-    useEffect(() => {
-      // const savedTheme = localStorage.getItem('theme');
-      const savedSearch = localStorage.getItem('searchStr');
-      if (savedSearch) {
-        setSearchStr(savedSearch);
-      }
-
-      const savedSearchCollection = localStorage.getItem('searchStrCollection');
-      if (savedSearchCollection) {
-        setSearchStr(savedSearchCollection);
-      }
-      const savedActivePage = Number(localStorage.getItem('activePage'));
-      // console.log('app use effect', activePage, savedActivePage);
-      if (savedActivePage) {
-        setActivePage(savedActivePage);
-      } else {
-        setActivePage(1);
-        localStorage.setItem('activePage', "1");
-      }
-
-      const savedActivePageCollection = Number(localStorage.getItem('activePageCollection'));
-      // console.log('app use effect', activePage, savedActivePage);
-      if (savedActivePageCollection) {
-        setActivePage(savedActivePageCollection);
-      } else {
-        setActivePageCollection(1);
-        localStorage.setItem('activePageCollection', "1");
-      }
-    },[])
+    const savedActivePageCollection = Number(localStorage.getItem('activePageCollection'));
+    // console.log('app use effect', activePage, savedActivePage);
+    if (savedActivePageCollection) {
+      setActivePage(savedActivePageCollection);
+    } else {
+      setActivePageCollection(1);
+      localStorage.setItem('activePageCollection', "1");
+    }
+  },[])
 
   return (
     <div className={`app-container ${theme}`}>
