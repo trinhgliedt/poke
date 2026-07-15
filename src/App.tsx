@@ -52,6 +52,18 @@ useEffect(() => {
     console.log("1. Starting initializePokeList");
     setLoading(true);
 
+    // Load myCollection from localStorage first
+    const savedMyCollectionRaw = localStorage.getItem('myCollection');
+    if (savedMyCollectionRaw) {
+      try {
+        const savedMyCollection = JSON.parse(savedMyCollectionRaw) as MyCollection;
+        setMyCollection(savedMyCollection);
+        console.log("Loaded myCollection from localStorage:", savedMyCollection.collection.length, "items");
+      } catch (err) {
+        console.error("Error parsing myCollection from localStorage:", err);
+      }
+    }
+
     const savedPokeListRaw = localStorage.getItem('pokeList');
     const savedAllPokeDetailsLoadedRaw = localStorage.getItem('all-poke-details-loaded');
     const itemCount = Number(localStorage.getItem('pokemon-list-count'));
